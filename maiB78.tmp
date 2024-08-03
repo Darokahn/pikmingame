@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnb7ddim5v24"]
+
+[ext_resource type="PackedScene" uid="uid://s5ucm17ap4ws" path="res://player.tscn" id="1_tjjus"]
+[ext_resource type="Script" path="res://main.gd" id="1_wx8y0"]
+[ext_resource type="PackedScene" uid="uid://bombfis85ymor" path="res://terrain.tscn" id="2_w2nph"]
+
+[node name="Main" type="Node2D"]
+position = Vector2(-3, 35)
+script = ExtResource("1_wx8y0")
+
+[node name="Terrain" parent="." instance=ExtResource("2_w2nph")]
+position = Vector2(67, 129)
+
+[node name="Player" parent="." instance=ExtResource("1_tjjus")]

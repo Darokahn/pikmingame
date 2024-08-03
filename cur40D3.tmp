@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://c068uy3sto1rc"]
+
+[ext_resource type="Shader" path="res://cursor.gdshader" id="1_igwfh"]
+[ext_resource type="Texture2D" uid="uid://umh811k2s6jf" path="res://images/cursor.png" id="2_muv7l"]
+[ext_resource type="Script" path="res://cursor.gd" id="3_awf6q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bvfur"]
+shader = ExtResource("1_igwfh")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3d03o"]
+atlas = ExtResource("2_muv7l")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ddkt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3d03o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Cursor" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_bvfur")
+sprite_frames = SubResource("SpriteFrames_4ddkt")
+script = ExtResource("3_awf6q")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(10, 10)

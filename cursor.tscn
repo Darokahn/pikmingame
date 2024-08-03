@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://c068uy3sto1rc"]
+
+[ext_resource type="Shader" path="res://cursor.gdshader" id="1_igwfh"]
+[ext_resource type="Texture2D" uid="uid://umh811k2s6jf" path="res://images/cursor.png" id="2_muv7l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_itcru"]
+radius = 3.16228
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bvfur"]
+shader = ExtResource("1_igwfh")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3d03o"]
+atlas = ExtResource("2_muv7l")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ddkt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3d03o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwho1"]
+atlas = ExtResource("2_muv7l")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2y7nq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwho1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Cursor" type="Node2D"]
+
+[node name="cursor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cursor"]
+shape = SubResource("CircleShape2D_itcru")
+disabled = true
+
+[node name="cursorsprite" type="AnimatedSprite2D" parent="cursor"]
+material = SubResource("ShaderMaterial_bvfur")
+sprite_frames = SubResource("SpriteFrames_4ddkt")
+
+[node name="pointer" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_2y7nq")

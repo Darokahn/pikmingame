@@ -1,0 +1,60 @@
+[gd_scene load_steps=12 format=3 uid="uid://cvmwqoaolj1fh"]
+
+[ext_resource type="Shader" path="res://posy.gdshader" id="1_dljr5"]
+[ext_resource type="Script" path="res://body.gd" id="1_fhekb"]
+[ext_resource type="Texture2D" uid="uid://bjir8gckkjo84" path="res://images/posy.png" id="2_05amv"]
+[ext_resource type="Script" path="res://pelletSprite.gd" id="4_70uvk"]
+[ext_resource type="Script" path="res://latchable.gd" id="4_j2qnt"]
+[ext_resource type="Script" path="res://HeightSprite.gd" id="5_gvgeu"]
+[ext_resource type="Script" path="res://scripts/damageable.gd" id="7_ypibu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_upkte"]
+shader = ExtResource("1_dljr5")
+shader_parameter/color = Vector4(0, 0, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3cun"]
+atlas = ExtResource("2_05amv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f4qmu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3cun")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c3o5e"]
+radius = 2.92165
+
+[node name="pellet" type="Node2D"]
+
+[node name="body" type="CharacterBody2D" parent="."]
+script = ExtResource("1_fhekb")
+
+[node name="sprite" type="AnimatedSprite2D" parent="body"]
+material = SubResource("ShaderMaterial_upkte")
+position = Vector2(0, 8)
+sprite_frames = SubResource("SpriteFrames_f4qmu")
+script = ExtResource("4_70uvk")
+
+[node name="latchzone" type="Area2D" parent="body"]
+position = Vector2(0, 8)
+scale = Vector2(0.684545, 0.986332)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body/latchzone"]
+position = Vector2(0, -8.11086)
+scale = Vector2(1.5, 1.11)
+shape = SubResource("CircleShape2D_c3o5e")
+
+[node name="Damageable" type="Node" parent="body"]
+script = ExtResource("7_ypibu")
+
+[node name="latchable" type="Node2D" parent="."]
+script = ExtResource("4_j2qnt")
+
+[node name="HeightSprite" type="Node" parent="."]
+script = ExtResource("5_gvgeu")

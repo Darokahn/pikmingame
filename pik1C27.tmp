@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://d10adsspmvqb3"]
+
+[ext_resource type="Texture2D" uid="uid://b3vpvxuja7m3b" path="res://images/red_piki.png" id="1_0flps"]
+[ext_resource type="Script" path="res://piki.gd" id="1_v5i5y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ttdqa"]
+radius = 2.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mws8u"]
+atlas = ExtResource("1_0flps")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ttadb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mws8u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Piki" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_v5i5y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_ttdqa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_ttadb")

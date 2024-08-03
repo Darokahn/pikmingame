@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg33os3par0yi"]
+
+[ext_resource type="PackedScene" uid="uid://cvmwqoaolj1fh" path="res://pellet.tscn" id="2_5c7fg"]
+[ext_resource type="Texture2D" uid="uid://bjir8gckkjo84" path="res://images/posy.png" id="2_nred1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vufs"]
+atlas = ExtResource("2_nred1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mxv1y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vufs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Posy" type="Node2D"]
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mxv1y")
+
+[node name="pellet" parent="." instance=ExtResource("2_5c7fg")]
+position = Vector2(0, 14)

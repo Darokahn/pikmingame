@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://d10adsspmvqb3"]
+
+[ext_resource type="Texture2D" uid="uid://b3vpvxuja7m3b" path="res://images/red_piki.png" id="1_0flps"]
+[ext_resource type="Script" path="res://piki.gd" id="1_v5i5y"]
+[ext_resource type="AudioStream" uid="uid://1pmbukk36hqw" path="res://sounds/Pikmin/throw.wav" id="3_7i2gs"]
+[ext_resource type="Script" path="res://pikiSprite.gd" id="3_gqimy"]
+[ext_resource type="AudioStream" uid="uid://dthkecrro63is" path="res://sounds/Pikmin/oh.wav" id="4_a841p"]
+[ext_resource type="AudioStream" uid="uid://3hl1fhdctow7" path="res://sounds/Pikmin/toss.wav" id="4_akayj"]
+[ext_resource type="AudioStream" uid="uid://datl4nw6t46cp" path="res://sounds/Pikmin/pluck2.wav" id="6_oj2qv"]
+[ext_resource type="Script" path="res://HeightSprite.gd" id="7_cyghf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mws8u"]
+atlas = ExtResource("1_0flps")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ttadb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mws8u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5wd5a"]
+radius = 2.0
+
+[node name="Piki" type="Node2D"]
+
+[node name="body" type="CharacterBody2D" parent="."]
+disable_mode = 2
+script = ExtResource("1_v5i5y")
+
+[node name="sprite" type="AnimatedSprite2D" parent="body"]
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_ttadb")
+script = ExtResource("3_gqimy")
+
+[node name="fly" type="AudioStreamPlayer2D" parent="body"]
+position = Vector2(1, 0)
+stream = ExtResource("3_7i2gs")
+
+[node name="called" type="AudioStreamPlayer2D" parent="body"]
+position = Vector2(1, 0)
+stream = ExtResource("4_a841p")
+volume_db = -8.914
+
+[node name="tossed" type="AudioStreamPlayer2D" parent="body"]
+stream = ExtResource("4_akayj")
+
+[node name="latch" type="AudioStreamPlayer2D" parent="body"]
+stream = ExtResource("6_oj2qv")
+
+[node name="Area2D" type="Area2D" parent="body"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body/Area2D"]
+position = Vector2(0.454546, 0.0181818)
+shape = SubResource("CircleShape2D_5wd5a")
+debug_color = Color(0, 0.596005, 0.722441, 0.42)
+
+[node name="HeightSprite" type="Node" parent="."]
+script = ExtResource("7_cyghf")
